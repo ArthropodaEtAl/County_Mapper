@@ -67,7 +67,9 @@ observations_csv = observations_csv.replace({'place_state_name': state_abbreviat
 #District of columnbia nomenclature 
 dc_excepttion = {'District of Columbia':'Washington'}
 observations_csv = observations_csv.replace({'place_county_name': dc_excepttion})
+#Add exception for counties with names that have a space in them using regex
 observations_csv['Add Text'] = observations_csv['place_county_name']+ "__" +observations_csv['place_state_name']
+#convert to string to insert into the .txt file
 add_string = np.array2string(observations_csv['Add Text'].unique(), separator=",")
 add_string= add_string.replace("'",'"')
 add_string= re.sub(r'(\w+)(\s)(\w+)',r'\1_\3',add_string)
